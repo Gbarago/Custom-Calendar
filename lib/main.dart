@@ -135,7 +135,7 @@ class CustomCalendar extends StatefulWidget {
 }
 
 class _CustomCalendarState extends State<CustomCalendar> {
-  PageController _pageController =
+  final PageController _pageController =
       PageController(initialPage: DateTime.now().month - 1);
 
   @override
@@ -167,7 +167,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             _pageController.previousPage(
                 duration: Duration(milliseconds: 300), curve: Curves.ease);
@@ -175,10 +175,10 @@ class _CustomCalendarState extends State<CustomCalendar> {
         ),
         Text(
           DateFormat.yMMMM().format(DateTime.now()),
-          style: TextStyle(fontSize: 18),
+          style: const TextStyle(fontSize: 18),
         ),
         IconButton(
-          icon: Icon(Icons.arrow_forward),
+          icon: const Icon(Icons.arrow_forward),
           onPressed: () {
             _pageController.nextPage(
                 duration: Duration(milliseconds: 300), curve: Curves.ease);
@@ -192,7 +192,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
 class CalendarMonth extends StatelessWidget {
   final DateTime month;
 
-  CalendarMonth(this.month);
+  const CalendarMonth(this.month);
 
   @override
   Widget build(BuildContext context) {
@@ -204,10 +204,10 @@ class CalendarMonth extends StatelessWidget {
             DateFormat.yMMMM().format(month),
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           GridView.builder(
             shrinkWrap: true,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 7,
               crossAxisSpacing: 7,
               mainAxisSpacing: 7,
@@ -226,6 +226,7 @@ class CalendarMonth extends StatelessWidget {
 
   ShiftType _getShiftType(DateTime date) {
     // Example logic to determine shift based on date
+    // thiswoildbbe later extracted from the api respomse  and the logic may not be needed again or may slightly differ
     if (date.weekday == DateTime.sunday) {
       return ShiftType.Off;
     } else if (date.day % 2 == 0) {
@@ -281,9 +282,11 @@ class CalendarMonth extends StatelessWidget {
               color: color,
               borderRadius: BorderRadius.circular(2),
             ),
-            child: Text(
-              shiftText,
-              style: const TextStyle(fontSize: 10, color: Colors.white),
+            child: Center(
+              child: Text(
+                shiftText,
+                style: const TextStyle(fontSize: 10, color: Colors.white),
+              ),
             ),
           ),
         ],
